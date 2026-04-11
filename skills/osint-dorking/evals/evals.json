@@ -1,0 +1,47 @@
+{
+  "skill_name": "osint-dorking",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Find me Google dorks for exposed .env files and explain the safest way to use them in an internal security audit.",
+      "expected_output": "Skill should trigger, provide defensive GHDB-style dork suggestions, and include authorization/safety framing.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Use GHDB to list 5 dorks related to open directory listings for backup archives.",
+      "expected_output": "Skill should trigger and return relevant dorks with concise relevance notes.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I need search operators to find accidentally exposed WordPress configuration backups on assets I own.",
+      "expected_output": "Skill should trigger, use dorking workflow, and maintain legal/authorized scope language.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Refactor this Python function to use pathlib and add unit tests.",
+      "expected_output": "Skill should not trigger because this is a general coding task unrelated to GHDB or dorking.",
+      "expected_trigger": false,
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Write a short product launch email for our SaaS release next week.",
+      "expected_output": "Skill should not trigger because this is a writing/marketing task.",
+      "expected_trigger": false,
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Summarize this Kubernetes incident timeline and propose follow-up action items.",
+      "expected_output": "Skill should not trigger because this is incident communication, not dork lookup.",
+      "expected_trigger": false,
+      "files": []
+    }
+  ]
+}
