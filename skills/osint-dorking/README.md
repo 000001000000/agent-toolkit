@@ -7,8 +7,11 @@ A skills.sh-compatible skill that helps AI agents handle OSINT dorking requests 
 From the repository root path:
 
 ```bash
-npx skills add <owner>/<repo>/skills/osint-dorking
+npx skills add 000001000000/agent-toolkit/skills/osint-dorking
 ```
+
+Repository URL:
+- https://github.com/000001000000/agent-toolkit
 
 ## What is included
 

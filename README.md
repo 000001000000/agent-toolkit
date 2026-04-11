@@ -22,14 +22,11 @@ This repository is structured as a multi-skill package for the skills.sh ecosyst
 Install the OSINT dorking skill directly via subpath:
 
 ```bash
-npx skills add <owner>/<repo>/skills/osint-dorking
+npx skills add 000001000000/agent-toolkit/skills/osint-dorking
 ```
 
-Example:
-
-```bash
-npx skills add acme/security-skills/skills/osint-dorking
-```
+Repository URL:
+- https://github.com/000001000000/agent-toolkit
 
 ## Available skills
 
