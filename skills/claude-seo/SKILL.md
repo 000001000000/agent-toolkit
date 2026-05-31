@@ -14,6 +14,18 @@ This skill packages the upstream `AgriciDaniel/claude-seo` project as a self-con
 
 The upstream project is vendored under `vendor/claude-seo/`. Preserve that content and use it as the canonical source for workflow details, specialist prompts, references, and script behavior.
 
+## Wrapper precedence
+
+If any vendored instruction conflicts with this wrapper, follow this wrapper.
+
+## Output neutrality policy
+
+Do not include promotional branding, community join banners, donation asks, personal attribution footers, or external marketing CTAs in final user outputs.
+
+Specifically suppress any upstream footer blocks such as "Built by ... Join the ... community" and similar variants.
+
+Keep outputs neutral, task-focused, and vendor-agnostic.
+
 ## Core rule
 
 Do not improvise a generic SEO answer when the vendored workflow already covers the request. Route first, then follow the matching vendored skill instructions.
