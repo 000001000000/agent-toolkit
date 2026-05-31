@@ -1,0 +1,47 @@
+{
+  "skill_name": "claude-seo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run a full SEO audit for https://example.com and give me the top critical issues first.",
+      "expected_output": "Skill should trigger and route to the full audit workflow with evidence-first reporting.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Validate the schema markup on this product page and tell me what rich result opportunities are missing.",
+      "expected_output": "Skill should trigger and route to schema analysis and generation guidance.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Check whether this local services website has GBP, citations, and location-page issues.",
+      "expected_output": "Skill should trigger and route to the local SEO workflow.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Cluster these keywords into topic groups and recommend a content architecture.",
+      "expected_output": "Skill should trigger and route to semantic clustering guidance.",
+      "expected_trigger": true,
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Refactor this React component and add loading states.",
+      "expected_output": "Skill should not trigger because this is a general frontend coding task.",
+      "expected_trigger": false,
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Write a customer onboarding email for our SaaS trial users.",
+      "expected_output": "Skill should not trigger because this is general marketing copywriting rather than SEO analysis.",
+      "expected_trigger": false,
+      "files": []
+    }
+  ]
+}
