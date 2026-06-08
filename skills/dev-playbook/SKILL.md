@@ -22,19 +22,17 @@ For all TDD behavior, defer to the dedicated `tdd` skill as the source of truth.
 - Requirement: when TDD is applicable, load and follow the `tdd` skill workflow instead of re-inventing TDD guidance here.
 - Scope: this includes red-green-refactor sequencing, behavior-first testing, and integration-test-oriented strategy.
 
-## One-time first-run setup
+## Automatic setup and sync
 
-On first invocation in a target project/workspace, run:
+On each invocation in a target project/workspace, run:
 
 - `bash .agents/skills/dev-playbook/scripts/ensure-setup.sh`
 
 Behavior:
-- This bootstrap is idempotent and runs only once per project.
-- It installs the companion `tdd` skill from Matt Pocock's skills repository.
-- It installs workspace instructions if they do not already exist.
-- It writes a marker file at `.dev-playbook/.initialized`.
-
-If the marker file exists, skip setup and continue with the normal workflow.
+- First run: installs companion `tdd` skill and initializes managed instructions.
+- Every run: syncs the managed instructions block when the template changed.
+- It tracks template version/hash in `.dev-playbook/.initialized`.
+- No-op when there are no setup/template changes.
 
 ## Core operating principles
 
@@ -176,7 +174,7 @@ Testing expectations:
 
 For each request, follow this sequence:
 
-1. Ensure first-run setup is complete (run `scripts/ensure-setup.sh` if `.dev-playbook/.initialized` is absent).
+1. Ensure setup/sync is current (run `scripts/ensure-setup.sh`).
 2. Classify stage: frontend, backend, full-stack, testing, or mixed.
 3. Perform reuse-first scan: existing code artifacts first, then library options.
 4. Propose a concise implementation path and justify build-vs-reuse decision.
@@ -223,7 +221,7 @@ Important limitation: skill systems typically cannot enforce absolute mandatory 
 
 To approximate mandatory behavior:
 1. Install `dev-playbook` in every target workspace/project.
-2. On first invocation, run one-time setup (automatic) to install companion `tdd` and workspace instructions.
+2. On invocation, run automatic setup/sync to keep companion `tdd` and managed workspace instructions current.
 3. Preferred `tdd` source: `npx skills add https://github.com/mattpocock/skills --skill tdd`.
 4. Keep the description broad and trigger-focused (already done here).
 5. Add a workspace or user-level instruction that makes this playbook the default for development requests.

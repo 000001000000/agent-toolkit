@@ -23,7 +23,12 @@ First invocation behavior:
 - On first invocation, dev-playbook runs `.agents/skills/dev-playbook/scripts/ensure-setup.sh` automatically.
 - This one-time setup installs companion `tdd` (`https://github.com/mattpocock/skills --skill tdd`).
 - It merges or appends the managed workspace instructions block in `.github/copilot-instructions.md`.
-- It writes `.dev-playbook/.initialized` and later invocations skip setup.
+- It writes `.dev-playbook/.initialized`.
+
+Ongoing invocation behavior:
+- On later invocations, the same script runs in sync mode.
+- If the managed template changed, it updates the managed block automatically.
+- If no template change is detected, it no-ops.
 
 Optional manual setup (non-interactive/bootstrap scripting):
 
@@ -34,7 +39,7 @@ bash .agents/skills/dev-playbook/scripts/setup-project.sh
 First-run automatic setup:
 - On first invocation, dev-playbook runs `.agents/skills/dev-playbook/scripts/ensure-setup.sh`.
 - This one-time setup installs companion `tdd`, merges or appends the managed instructions block, and writes `.dev-playbook/.initialized`.
-- Later invocations detect the marker and skip setup.
+- Later invocations use the same script to sync managed instructions when templates are updated.
 
 ## Why use it
 

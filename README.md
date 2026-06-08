@@ -62,6 +62,9 @@ npx skills add 000001000000/agent-toolkit/skills/dev-playbook
 - It merges or appends the managed workspace instructions block.
 - It writes `.dev-playbook/.initialized` so later invocations skip setup.
 
+3. Continue using `dev-playbook` normally.
+- On every invocation, setup sync checks for template updates and refreshes the managed instructions block automatically when needed.
+
 Optional manual setup (for non-interactive/bootstrap scripting):
 
 ```bash
@@ -71,6 +74,9 @@ bash .agents/skills/dev-playbook/scripts/setup-project.sh
 First-run behavior:
 - On first use of dev-playbook in a target project, it runs one-time setup via `.agents/skills/dev-playbook/scripts/ensure-setup.sh`.
 - This installs companion `tdd`, merges or appends the managed workspace instructions block, and writes `.dev-playbook/.initialized`.
+
+Update behavior:
+- On later invocations, the same script runs in sync mode and updates the managed instructions block only if the template changed.
 
 ## Development note
 

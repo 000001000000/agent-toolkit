@@ -4,16 +4,7 @@ set -euo pipefail
 MARKER_DIR=".dev-playbook"
 MARKER_FILE="$MARKER_DIR/.initialized"
 
-if [[ -f "$MARKER_FILE" ]]; then
-  echo "dev-playbook setup already initialized."
-  exit 0
-fi
-
-echo "Running one-time dev-playbook setup..."
-
-# Ensure companion TDD skill is available.
-echo "Installing companion tdd skill (mattpocock)..."
-npx skills add https://github.com/mattpocock/skills --skill tdd
+echo "Running dev-playbook setup/sync..."
 
 mkdir -p .github
 
@@ -21,6 +12,17 @@ SRC=".agents/skills/dev-playbook/templates/copilot-instructions.md"
 DEST=".github/copilot-instructions.md"
 MARKER_BEGIN="# BEGIN dev-playbook managed block"
 MARKER_END="# END dev-playbook managed block"
+
+template_sha() {
+  shasum -a 256 "$1" | awk '{print $1}'
+}
+
+read_marker_value() {
+  local key="$1"
+  if [[ -f "$MARKER_FILE" ]]; then
+    awk -F '=' -v k="$key" '$1 == k { print $2 }' "$MARKER_FILE" | tail -n 1
+  fi
+}
 
 if [[ ! -f "$SRC" ]]; then
   echo "Could not find template at $SRC"
@@ -87,14 +89,30 @@ merge_managed_block() {
   rm -f "$tmp_block" "$tmp_out"
 }
 
+current_template_sha="$(template_sha "$SRC")"
+stored_template_sha="$(read_marker_value template_sha)"
+
+# One-time dependency install on first initialization only.
+if [[ ! -f "$MARKER_FILE" ]]; then
+  echo "Installing companion tdd skill (mattpocock)..."
+  npx skills add https://github.com/mattpocock/skills --skill tdd
+fi
+
 if [[ ! -f "$DEST" ]]; then
   cp "$SRC" "$DEST"
   echo "Installed workspace instructions at $DEST"
 else
-  merge_managed_block "$SRC" "$DEST"
+  if [[ "$stored_template_sha" != "$current_template_sha" ]]; then
+    merge_managed_block "$SRC" "$DEST"
+  else
+    echo "Managed instructions block already up to date."
+  fi
 fi
 
 mkdir -p "$MARKER_DIR"
-printf '%s\n' "initialized_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$MARKER_FILE"
+{
+  printf '%s\n' "initialized_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  printf '%s\n' "template_sha=$current_template_sha"
+} > "$MARKER_FILE"
 
-echo "One-time setup completed."
+echo "Setup/sync completed."
