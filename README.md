@@ -31,6 +31,12 @@ Install the Claude SEO skill directly via subpath:
 npx skills add 000001000000/agent-toolkit/skills/claude-seo
 ```
 
+Install the Dev Playbook skill directly via subpath:
+
+```bash
+npx skills add 000001000000/agent-toolkit/skills/dev-playbook
+```
+
 Repository URL:
 - https://github.com/000001000000/agent-toolkit
 
@@ -38,6 +44,7 @@ Repository URL:
 
 - [skills/osint-dorking](skills/osint-dorking): OSINT dorking workflow with GHDB-backed search tooling and trigger-eval utilities.
 - [skills/claude-seo](skills/claude-seo): Generic-agent packaging of the Claude SEO workflow with vendored upstream scripts, prompts, and reference material.
+- [skills/dev-playbook](skills/dev-playbook): Default software development playbook with TDD-first flow, frontend/backend/full-stack rules, and verification gates.
 
 ## Development note
 

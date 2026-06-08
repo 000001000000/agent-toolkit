@@ -1,0 +1,23 @@
+{
+  "skill_name": "dev-playbook",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a profile settings UI with tabs and save actions. Keep the code clean.",
+      "expected_output": "Uses reusable frontend components, clear structure, and includes visual verification steps.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Add a new REST endpoint for invoice creation and make sure quality is high.",
+      "expected_output": "Uses contract-first backend approach, adds tests in TDD flow, and validates error handling.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Implement a checkout flow end to end from UI to API and verify everything.",
+      "expected_output": "Applies both frontend and backend rules, tests integration points, and reports verification results.",
+      "files": []
+    }
+  ]
+}
