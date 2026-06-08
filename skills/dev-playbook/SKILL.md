@@ -18,9 +18,23 @@ If a user asks for development work, this skill should be applied first to decid
 
 For all TDD behavior, defer to the dedicated `tdd` skill as the source of truth.
 
-- Required reference: `.agents/skills/tdd/SKILL.md`
+- Required dependency: install the `tdd` skill in the target project/workspace.
 - Requirement: when TDD is applicable, load and follow the `tdd` skill workflow instead of re-inventing TDD guidance here.
 - Scope: this includes red-green-refactor sequencing, behavior-first testing, and integration-test-oriented strategy.
+
+## One-time first-run setup
+
+On first invocation in a target project/workspace, run:
+
+- `bash .agents/skills/dev-playbook/scripts/ensure-setup.sh`
+
+Behavior:
+- This bootstrap is idempotent and runs only once per project.
+- It installs the companion `tdd` skill from Matt Pocock's skills repository.
+- It installs workspace instructions if they do not already exist.
+- It writes a marker file at `.dev-playbook/.initialized`.
+
+If the marker file exists, skip setup and continue with the normal workflow.
 
 ## Core operating principles
 
@@ -162,21 +176,22 @@ Testing expectations:
 
 For each request, follow this sequence:
 
-1. Classify stage: frontend, backend, full-stack, testing, or mixed.
-2. Perform reuse-first scan: existing code artifacts first, then library options.
-3. Propose a concise implementation path and justify build-vs-reuse decision.
-4. Apply TDD loop when feasible.
-5. Implement with reusable design and clean abstractions.
-6. Run verification (tests/lint/build/visual checks as applicable).
-7. Run security quick-pass checklist and record findings.
-8. Report outcomes, risks, and any unverified assumptions.
+1. Ensure first-run setup is complete (run `scripts/ensure-setup.sh` if `.dev-playbook/.initialized` is absent).
+2. Classify stage: frontend, backend, full-stack, testing, or mixed.
+3. Perform reuse-first scan: existing code artifacts first, then library options.
+4. Propose a concise implementation path and justify build-vs-reuse decision.
+5. Apply TDD loop when feasible.
+6. Implement with reusable design and clean abstractions.
+7. Run verification (tests/lint/build/visual checks as applicable).
+8. Run security quick-pass checklist and record findings.
+9. Report outcomes, risks, and any unverified assumptions.
 
 Complexity gate:
 - Before adding new abstraction layers, justify why simpler alternatives are insufficient.
 - For early dev-phase features with no active consumers, ask before adding compatibility shims, generalized extension points, or architecture-heavy patterns.
 
 TDD rule for step 3:
-- Load `.agents/skills/tdd/SKILL.md` and follow it for cycle planning and execution.
+- Load the installed `tdd` skill and follow it for cycle planning and execution.
 
 ## Output contract
 
@@ -207,9 +222,11 @@ This skill is designed to act as the main entry playbook for development tasks.
 Important limitation: skill systems typically cannot enforce absolute mandatory execution for every possible prompt by themselves.
 
 To approximate mandatory behavior:
-1. Install this skill in every workspace where you develop.
-2. Keep the description broad and trigger-focused (already done here).
-3. Add a global/user instruction in your coding assistant settings saying this playbook is the default for all development requests.
+1. Install `dev-playbook` in every target workspace/project.
+2. On first invocation, run one-time setup (automatic) to install companion `tdd` and workspace instructions.
+3. Preferred `tdd` source: `npx skills add https://github.com/mattpocock/skills --skill tdd`.
+4. Keep the description broad and trigger-focused (already done here).
+5. Add a workspace or user-level instruction that makes this playbook the default for development requests.
 
 ## Example triggers
 

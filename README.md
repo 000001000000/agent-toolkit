@@ -46,6 +46,32 @@ Repository URL:
 - [skills/claude-seo](skills/claude-seo): Generic-agent packaging of the Claude SEO workflow with vendored upstream scripts, prompts, and reference material.
 - [skills/dev-playbook](skills/dev-playbook): Default software development playbook with TDD-first flow, frontend/backend/full-stack rules, and verification gates.
 
+## Use In Any Project
+
+For projects where you want this behavior by default:
+
+1. Install playbook skill:
+
+```bash
+npx skills add 000001000000/agent-toolkit/skills/dev-playbook
+```
+
+2. Invoke `dev-playbook` once in that project.
+- On first invocation, the skill runs one-time setup automatically.
+- It installs companion `tdd` from Matt Pocock's skills repository.
+- It merges or appends the managed workspace instructions block.
+- It writes `.dev-playbook/.initialized` so later invocations skip setup.
+
+Optional manual setup (for non-interactive/bootstrap scripting):
+
+```bash
+bash .agents/skills/dev-playbook/scripts/setup-project.sh
+```
+
+First-run behavior:
+- On first use of dev-playbook in a target project, it runs one-time setup via `.agents/skills/dev-playbook/scripts/ensure-setup.sh`.
+- This installs companion `tdd`, merges or appends the managed workspace instructions block, and writes `.dev-playbook/.initialized`.
+
 ## Development note
 
 Each skill is self-contained so adding additional skills later does not break existing installation paths.
